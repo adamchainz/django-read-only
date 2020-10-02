@@ -2,6 +2,8 @@ import os
 from contextlib import contextmanager
 
 from django.apps import AppConfig
+from django.conf import settings
+from django.core.signals import setting_changed
 from django.db import connections
 from django.db.backends.signals import connection_created
 
@@ -15,15 +17,28 @@ class DjangoReadOnlyAppConfig(AppConfig):
     verbose_name = "django-read-only"
 
     def ready(self):
-        global read_only
-        read_only = bool(os.environ.get("DJANGO_READ_ONLY", ""))
-        self.add_database_instrumentation()
+        set_read_only()
 
-    def add_database_instrumentation(self):
         for alias in connections:
             connection = connections[alias]
             install_hook(connection)
         connection_created.connect(install_hook)
+
+        setting_changed.connect(reset_read_only)
+
+
+def set_read_only():
+    global read_only
+    if settings.is_overridden("DJANGO_READ_ONLY"):
+        read_only = settings.DJANGO_READ_ONLY
+    else:
+        read_only = bool(os.environ.get("DJANGO_READ_ONLY", ""))
+
+
+def reset_read_only(setting, **kwargs):
+    global read_only
+    if setting == "DJANGO_READ_ONLY":
+        set_read_only()
 
 
 def install_hook(connection, **kwargs):
