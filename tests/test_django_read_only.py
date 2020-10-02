@@ -9,7 +9,6 @@ from django.test import TestCase, override_settings
 
 import django_read_only
 
-
 set_env_vars = partial(mock.patch.dict, os.environ)
 
 
