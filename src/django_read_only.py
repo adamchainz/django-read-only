@@ -75,7 +75,7 @@ def should_block(sql):
                 "SET ",
             )
         )
-        and sql not in ("BEGIN", "COMMIT")
+        and sql not in ("BEGIN", "COMMIT", "ROLLBACK")
     )
 
 
