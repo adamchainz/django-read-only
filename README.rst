@@ -52,9 +52,9 @@ Usage
 
 In your settings file, set ``DJANGO_READ_ONLY`` to ``True`` and all data modification queries will cause an exception:
 
-.. code-block:: sh
+.. code-block:: console
 
-    DJANGO_READ_ONLY=1 python manage.py shell
+    $ DJANGO_READ_ONLY=1 python manage.py shell
     ...
     >>> User.objects.create_user(username="hacker", password="hunter2")
     ...
@@ -63,10 +63,7 @@ In your settings file, set ``DJANGO_READ_ONLY`` to ``True`` and all data modific
 For convenience, you can also control this with the ``DJANGO_READ_ONLY`` environment variable, which will count as ``True`` if set to anything but the empty string.
 The setting takes precedence over the environment variable.
 
-The recommended setup is to set the environment variable in the shell profile file (``bashrc``, ``zshrc``, etc.) of your production system’s user account.
-This way developers performing exploratory queries can’t accidentally make changes, but writes will remain enabled for non-shell processes like your WSGI server.
-
-During a session with ``DJANGO_READ_ONLY`` set, you can re-enable writes for the current thread by calling ``enable_writes()``:
+During a session with ``DJANGO_READ_ONLY`` set on, you can re-enable writes by calling ``enable_writes()``:
 
 .. code-block:: pycon
 
@@ -85,3 +82,30 @@ To temporarily allow writes, use the ``temp_writes()`` context manager / decorat
 
     >>> with django_read_only.temp_writes():
     ...      User.objects.create_user(...)
+
+Note that writes being enabled/disabled is global state, affecting all threads and asynchronous coroutines.
+
+Recommended Setup
+-----------------
+
+Set read-only mode on in your production environment, and maybe staging, during interactive sessions.
+This can be done by setting the ``DJANGO_READ_ONLY```` environment variable in the shell profile file (``bashrc``, ``zshrc``, etc.) of the system’s user account.
+This way developers performing exploratory queries can’t accidentally make changes, but writes will remain enabled for non-shell processes like your WSGI server.
+
+With this setup, developers can also run management commands with writes enabled by setting the environment variable before the command:
+
+.. code-block:: console
+
+    $ DJANGO_READ_ONLY= python manage.py clearsessions
+
+How it Works
+------------
+
+The most accurate way to prevent writes is to connect as a separate database user with only read permission.
+However, this has limitations - Django doesn’t support modifying the ``DATABASES`` setting live, so sessions would not be able to temporarily allow writes.
+
+Instead, django-read-only uses `always installed database instrumentation <https://adamj.eu/tech/2020/07/23/how-to-make-always-installed-django-database-instrumentation/>`__ to inspect executed queries and only allow those which look like reads.
+It uses a “fail closed” philosophy, so anything unknown will fail, which should be fairly reasonable.
+
+Because django-read-only uses Django database instrumentation, it cannot block queries running through the underlying database connection (accesses through ``django.db.connection.connection``), and it cannot filter operations within stored procedures (which use ``connection.callproc()``).
+These are very rare in practice though, so django-read-only’s method works well for most projects.
