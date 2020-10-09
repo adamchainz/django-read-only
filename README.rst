@@ -89,7 +89,7 @@ Recommended Setup
 -----------------
 
 Set read-only mode on in your production environment, and maybe staging, during interactive sessions.
-This can be done by setting the ``DJANGO_READ_ONLY```` environment variable in the shell profile file (``bashrc``, ``zshrc``, etc.) of the system’s user account.
+This can be done by setting the ``DJANGO_READ_ONLY`` environment variable in the shell profile file (``bashrc``, ``zshrc``, etc.) of the system’s user account.
 This way developers performing exploratory queries can’t accidentally make changes, but writes will remain enabled for non-shell processes like your WSGI server.
 
 With this setup, developers can also run management commands with writes enabled by setting the environment variable before the command:
