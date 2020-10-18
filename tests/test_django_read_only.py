@@ -13,6 +13,11 @@ set_env_vars = partial(mock.patch.dict, os.environ)
 
 
 class DjangoReadOnlyTests(TestCase):
+    def tearDown(self):
+        # reset after every test
+        django_read_only.read_only = False
+        super().tearDown()
+
     def test_set_read_only_default_false(self):
         """
         Check that, in the absence of a value for the setting and environment
