@@ -68,6 +68,13 @@ class DjangoReadOnlyTests(TestCase):
             with override_settings(DJANGO_READ_ONLY=True):
                 assert django_read_only.read_only
 
+    def test_setting_changed_different_setting(self):
+        """
+        Check that if a different setting changes, read_only doesn't change.
+        """
+        with override_settings(SITE_ID=2):
+            assert not django_read_only.read_only
+
     def test_disable_writes(self):
         django_read_only.disable_writes()
 
