@@ -59,7 +59,10 @@ class DjangoReadOnlyError(Exception):
 
 def blocker(execute, sql, params, many, context):
     if read_only and should_block(sql):
-        raise DjangoReadOnlyError("Write queries are currently disabled")
+        raise DjangoReadOnlyError(
+            "Write queries are currently disabled."
+            + " Enable with django_read_only.enable_writes()."
+        )
     return execute(sql, params, many, context)
 
 
