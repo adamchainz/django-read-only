@@ -2,6 +2,9 @@
 History
 =======
 
+1.1.1 (2020-11-18)
+------------------
+
 * Support Python 3.9.
 * Add a hint on how to enable writes in the ``DjangoReadOnlyError`` message.
 
