@@ -70,6 +70,7 @@ def should_block(sql):
     return (
         not sql.startswith(
             (
+                "EXPLAIN ",
                 "PRAGMA ",
                 "ROLLBACK TO SAVEPOINT ",
                 "RELEASE SAVEPOINT ",
