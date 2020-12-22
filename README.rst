@@ -104,13 +104,16 @@ With this setup, developers can also run management commands with writes enabled
 Some deployment platforms don’t allow you to customize your shell profile files.
 In this case, you will need to find a way to detect shell mode from within your settings file.
 
-For example, on Heroku there’s the ``DYNO`` environment variable (`docs <https://devcenter.heroku.com/articles/dynos#local-environment-variables>`__) to identify the current process.
-It starts with “run” for interactive sessions.
+For example, on Heroku there’s the ``DYNO`` environment variable (`docs <https://devcenter.heroku.com/articles/dynos#local-environment-variables>`__) to identify the current virtual machine.
+It starts with “run.” for interactive sessions.
 You can use this to enable read-only mode in your settings file like so:
 
 .. code-block:: python
 
-    DJANGO_READ_ONLY = os.environ.get("DYNO", "").startswith("run.")
+    if os.environ.get("DYNO", "").startswith("run."):
+        DJANGO_READ_ONLY = bool(os.environ.get("DJANGO_READ_ONLY", "1"))
+    else:
+        DJANGO_READ_ONLY = False
 
 How it Works
 ------------
