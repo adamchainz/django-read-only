@@ -1,13 +1,15 @@
 import os
 from contextlib import contextmanager
 
+import django
 from django.apps import AppConfig
 from django.conf import settings
 from django.core.signals import setting_changed
 from django.db import connections
 from django.db.backends.signals import connection_created
 
-default_app_config = "django_read_only.DjangoReadOnlyAppConfig"
+if django.VERSION < (3, 2):
+    default_app_config = "django_read_only.DjangoReadOnlyAppConfig"
 
 read_only = False
 
