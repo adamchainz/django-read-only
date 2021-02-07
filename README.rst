@@ -2,10 +2,10 @@
 django-read-only
 ================
 
-.. image:: https://img.shields.io/github/workflow/status/adamchainz/django-read-only/CI/master?style=for-the-badge
+.. image:: https://img.shields.io/github/workflow/status/adamchainz/django-read-only/CI/main?style=for-the-badge
    :target: https://github.com/adamchainz/django-read-only/actions?workflow=CI
 
-.. image:: https://img.shields.io/coveralls/github/adamchainz/django-read-only/master?style=for-the-badge
+.. image:: https://img.shields.io/coveralls/github/adamchainz/django-read-only/main?style=for-the-badge
   :target: https://app.codecov.io/gh/adamchainz/django-read-only
 
 .. image:: https://img.shields.io/pypi/v/django-read-only.svg?style=for-the-badge
