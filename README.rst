@@ -50,7 +50,7 @@ Then add to your installed apps:
     INSTALLED_APPS = [
         ...,
         "django_read_only",
-        ...
+        ...,
     ]
 
 Usage
@@ -87,7 +87,8 @@ To temporarily allow writes, use the ``temp_writes()`` context manager / decorat
 .. code-block:: pycon
 
     >>> with django_read_only.temp_writes():
-    ...      User.objects.create_user(...)
+    ...     User.objects.create_user(...)
+    ...
 
 Note that writes being enabled/disabled is global state, affecting all threads and asynchronous coroutines.
 
