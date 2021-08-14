@@ -1,11 +1,13 @@
 import os
 from contextlib import contextmanager
+from typing import Any, Callable, Dict, Generator
 
 import django
 from django.apps import AppConfig
 from django.conf import settings
 from django.core.signals import setting_changed
 from django.db import connections
+from django.db.backends.base.base import BaseDatabaseWrapper
 from django.db.backends.signals import connection_created
 
 if django.VERSION < (3, 2):
@@ -18,7 +20,7 @@ class DjangoReadOnlyAppConfig(AppConfig):
     name = "django_read_only"
     verbose_name = "django-read-only"
 
-    def ready(self):
+    def ready(self) -> None:
         set_read_only()
 
         for alias in connections:
@@ -29,7 +31,7 @@ class DjangoReadOnlyAppConfig(AppConfig):
         setting_changed.connect(reset_read_only)
 
 
-def set_read_only():
+def set_read_only() -> None:
     global read_only
     if settings.is_overridden("DJANGO_READ_ONLY"):
         read_only = settings.DJANGO_READ_ONLY
@@ -37,13 +39,13 @@ def set_read_only():
         read_only = bool(os.environ.get("DJANGO_READ_ONLY", ""))
 
 
-def reset_read_only(setting, **kwargs):
+def reset_read_only(setting: str, **kwargs: object) -> None:
     global read_only
     if setting == "DJANGO_READ_ONLY":
         set_read_only()
 
 
-def install_hook(connection, **kwargs):
+def install_hook(connection: BaseDatabaseWrapper, **kwargs: object) -> None:
     """
     Rather than use the documented API of the `execute_wrapper()` context
     manager, directly insert the hook. This is done because:
@@ -59,7 +61,13 @@ class DjangoReadOnlyError(Exception):
     pass
 
 
-def blocker(execute, sql, params, many, context):
+def blocker(
+    execute: Callable[[str, str, bool, Dict[str, Any]], Any],
+    sql: str,
+    params: str,
+    many: bool,
+    context: Dict[str, Any],
+) -> Any:
     if read_only and should_block(sql):
         raise DjangoReadOnlyError(
             "Write queries are currently disabled."
@@ -68,7 +76,7 @@ def blocker(execute, sql, params, many, context):
     return execute(sql, params, many, context)
 
 
-def should_block(sql):
+def should_block(sql: str) -> bool:
     return (
         not sql.startswith(
             (
@@ -85,18 +93,18 @@ def should_block(sql):
     )
 
 
-def enable_writes():
+def enable_writes() -> None:
     global read_only
     read_only = False
 
 
-def disable_writes():
+def disable_writes() -> None:
     global read_only
     read_only = True
 
 
 @contextmanager
-def temp_writes():
+def temp_writes() -> Generator[None, None, None]:
     enable_writes()
     try:
         yield

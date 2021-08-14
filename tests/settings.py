@@ -1,4 +1,5 @@
 import os
+from typing import List
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -17,14 +18,14 @@ DATABASES = {
     },
 }
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: List[str] = []
 
 INSTALLED_APPS = [
     "django_read_only",
     "django.contrib.sites",
 ]
 
-MIDDLEWARE = []
+MIDDLEWARE: List[str] = []
 
 ROOT_URLCONF = "tests.urls"
 LANGUAGE_CODE = "en-us"
