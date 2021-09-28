@@ -1,6 +1,8 @@
 import os
 from typing import List
 
+import django
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = "NOTASECRET"
@@ -31,7 +33,9 @@ ROOT_URLCONF = "tests.urls"
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
-USE_L10N = True
+
+if django.VERSION < (4, 0):
+    USE_L10N = True
 
 SITE_ID = 1
 
