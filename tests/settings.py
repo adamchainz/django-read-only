@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import os
-from typing import List
 
 import django
 
@@ -20,14 +21,14 @@ DATABASES = {
     },
 }
 
-ALLOWED_HOSTS: List[str] = []
+ALLOWED_HOSTS: list[str] = []
 
 INSTALLED_APPS = [
     "django_read_only",
     "django.contrib.sites",
 ]
 
-MIDDLEWARE: List[str] = []
+MIDDLEWARE: list[str] = []
 
 ROOT_URLCONF = "tests.urls"
 LANGUAGE_CODE = "en-us"

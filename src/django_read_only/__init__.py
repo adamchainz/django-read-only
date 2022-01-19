@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import os
 from contextlib import contextmanager
-from typing import Any, Callable, Dict, Generator
+from typing import Any, Callable, Generator
 
 import django
 from django.apps import AppConfig
@@ -62,11 +64,11 @@ class DjangoReadOnlyError(Exception):
 
 
 def blocker(
-    execute: Callable[[str, str, bool, Dict[str, Any]], Any],
+    execute: Callable[[str, str, bool, dict[str, Any]], Any],
     sql: str,
     params: str,
     many: bool,
-    context: Dict[str, Any],
+    context: dict[str, Any],
 ) -> Any:
     if read_only and should_block(sql):
         raise DjangoReadOnlyError(
