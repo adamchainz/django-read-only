@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 from functools import partial
 from unittest import mock
