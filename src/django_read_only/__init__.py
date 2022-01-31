@@ -79,20 +79,17 @@ def blocker(
 
 
 def should_block(sql: str) -> bool:
-    return (
-        not sql.startswith(
-            (
-                "EXPLAIN ",
-                "PRAGMA ",
-                "ROLLBACK TO SAVEPOINT ",
-                "RELEASE SAVEPOINT ",
-                "SAVEPOINT ",
-                "SELECT ",
-                "SET ",
-            )
+    return not sql.startswith(
+        (
+            "EXPLAIN ",
+            "PRAGMA ",
+            "ROLLBACK TO SAVEPOINT ",
+            "RELEASE SAVEPOINT ",
+            "SAVEPOINT ",
+            "SELECT ",
+            "SET ",
         )
-        and sql not in ("BEGIN", "COMMIT", "ROLLBACK")
-    )
+    ) and sql not in ("BEGIN", "COMMIT", "ROLLBACK")
 
 
 def enable_writes() -> None:
