@@ -2,6 +2,9 @@
 History
 =======
 
+1.10.0 (2022-07-20)
+-------------------
+
 * Allow read-only-looking queries that start with space, newline, or “(”.
   The later allows ``QuerySet.union()`` and related methods to work.
 
