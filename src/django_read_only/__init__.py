@@ -75,7 +75,7 @@ def blocker(
 
 
 def should_block(sql: str) -> bool:
-    return not sql.startswith(
+    return not sql.lstrip(" \n(").startswith(
         (
             "EXPLAIN ",
             "PRAGMA ",
