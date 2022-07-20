@@ -6,7 +6,7 @@ from unittest import mock
 
 import pytest
 from django.contrib.sites.models import Site
-from django.db import transaction
+from django.db import connection, transaction
 from django.test import TestCase, override_settings
 
 import django_read_only
@@ -92,6 +92,23 @@ class DjangoReadOnlyTests(TestCase):
         django_read_only.disable_writes()
 
         Site.objects.count()
+
+    def test_disable_writes_allows_space_prefix(self):
+        django_read_only.disable_writes()
+
+        with connection.cursor() as cursor:
+            cursor.execute(" SELECT 1")
+
+    def test_disable_writes_allows_newline_prefix(self):
+        django_read_only.disable_writes()
+
+        with connection.cursor() as cursor:
+            cursor.execute("\nSELECT 1")
+
+    def test_disable_writes_allows_union(self):
+        django_read_only.disable_writes()
+
+        Site.objects.order_by().union(Site.objects.order_by()).count()
 
     def test_disable_writes_allows_atomics_around_reads(self):
         django_read_only.disable_writes()

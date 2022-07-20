@@ -2,6 +2,11 @@
 History
 =======
 
+* Allow read-only-looking queries that start with space, newline, or “(”.
+  The later allows ``QuerySet.union()`` and related methods to work.
+
+  Thanks to Kevin Marsh for the report in `Issue #166 <https://github.com/adamchainz/django-read-only/issues/166>`__.
+
 1.9.0 (2022-06-05)
 ------------------
 
