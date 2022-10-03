@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import os
+from concurrent.futures import ThreadPoolExecutor
 from functools import partial
+from typing import Any, Callable
 from unittest import mock
 
 import pytest
@@ -129,3 +131,25 @@ class DjangoReadOnlyTests(TestCase):
 
         with pytest.raises(django_read_only.DjangoReadOnlyError):
             Site.objects.create(domain="example.co", name="Example co")
+
+    def test_alongside_other_instrumentation(self):
+        def noop(
+            execute: Callable[[str, str, bool, dict[str, Any]], Any],
+            sql: str,
+            params: str,
+            many: bool,
+            context: dict[str, Any],
+        ) -> Any:
+            return execute(sql, params, many, context)
+
+        def threadable() -> list[Any]:
+            with connection.execute_wrapper(noop):
+                with connection.cursor() as cursor:
+                    cursor.execute("SELECT 1234")
+
+            return connection.execute_wrappers
+
+        with ThreadPoolExecutor(max_workers=1) as executor:
+            result = executor.submit(threadable).result()
+
+        assert result == [django_read_only.blocker]
