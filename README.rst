@@ -119,6 +119,34 @@ You can use this to enable read-only mode in your settings file like so:
     else:
         DJANGO_READ_ONLY = False
 
+IPython Extension
+-----------------
+
+django-read-only also works as an IPython extension for quick access to enable/disable read-only mode.
+Load it with:
+
+.. code-block:: ipython
+
+    In [1]: %load_ext django_read_only
+
+You can have the extension always load by setting it up to your `IPython configuration file <https://ipython.readthedocs.io/en/stable/config/intro.html>`__:
+
+.. code-block:: python
+
+    c.InteractiveShellApp.extensions.append("django_read_only")
+
+When loaded, use the ``%read_only`` line magic to disable or enable read-only mode:
+
+.. code-block:: ipython
+
+    In [2]: %read_only off
+    Write queries enabled.
+
+    In [3]: %read_only on
+    Write queries disabled.
+
+This reduces the amount of typing needed to disable read-only mode.
+
 How it Works
 ------------
 

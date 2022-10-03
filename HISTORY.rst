@@ -2,6 +2,13 @@
 History
 =======
 
+* Add IPython extension, allowing you to use line magic to change read-only mode with less typing:
+
+  .. code-block:: ipython
+
+      In [1]: %read_only off
+      Write queries enabled.
+
 1.10.1 (2022-10-03)
 -------------------
 
