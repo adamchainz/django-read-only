@@ -2,6 +2,10 @@
 History
 =======
 
+* Fix a bug where threads creating connections with ``execute_wrapper()`` would incorrectly have django-read-only’s instrumentation removed on exit of ``execute_wrapper()``, instead of their own.
+
+  Thanks to Christian Bundy for the report in `Issue #180 <https://github.com/adamchainz/django-read-only/issues/180>`__.
+
 1.10.0 (2022-07-20)
 -------------------
 

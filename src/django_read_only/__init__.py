@@ -52,7 +52,7 @@ def install_hook(connection: BaseDatabaseWrapper, **kwargs: object) -> None:
     2. We want to be idempotent and only install the hook once.
     """
     if blocker not in connection.execute_wrappers:  # pragma: no branch
-        connection.execute_wrappers.append(blocker)
+        connection.execute_wrappers.insert(0, blocker)
 
 
 class DjangoReadOnlyError(Exception):
