@@ -2,6 +2,9 @@
 History
 =======
 
+1.11.0 (2022-10-05)
+-------------------
+
 * Add IPython extension, allowing you to use line magic to change read-only mode with less typing:
 
   .. code-block:: ipython
