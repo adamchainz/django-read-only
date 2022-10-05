@@ -1,5 +1,6 @@
 coverage
 django
+ipython
 pytest
 pytest-django
 pytest-randomly

@@ -12,6 +12,7 @@ from django.db.backends.base.base import BaseDatabaseWrapper
 from django.db.backends.signals import connection_created
 
 read_only = False
+ipython_extension_loaded = False
 
 
 class DjangoReadOnlyAppConfig(AppConfig):
@@ -67,10 +68,12 @@ def blocker(
     context: dict[str, Any],
 ) -> Any:
     if read_only and should_block(sql):
-        raise DjangoReadOnlyError(
-            "Write queries are currently disabled."
-            + " Enable with django_read_only.enable_writes()."
-        )
+        msg = "Write queries are currently disabled. "
+        if ipython_extension_loaded:
+            msg += "Enable with '%read_only off' or django_read_only.enable_writes()."
+        else:
+            msg += "Enable with django_read_only.enable_writes()."
+        raise DjangoReadOnlyError(msg)
     return execute(sql, params, many, context)
 
 
@@ -105,3 +108,32 @@ def temp_writes() -> Generator[None, None, None]:
         yield
     finally:
         disable_writes()
+
+
+def load_ipython_extension(ipython: Any) -> None:
+    global ipython_extension_loaded
+
+    from IPython.core.magic import Magics, line_magic, magics_class
+
+    ipython_extension_loaded = True
+
+    @magics_class
+    class DjangoReadOnlyMagics(Magics):  # type: ignore [misc]
+        @line_magic  # type: ignore [misc]
+        def read_only(self, line: str) -> None:
+            if line == "on":
+                disable_writes()
+                print("Write queries disabled.")
+            elif line == "off":
+                enable_writes()
+                print("Write queries enabled.")
+            else:
+                print(f"Unknown value {line!r}, pass 'on' or 'off'.")
+
+    ipython.register_magics(DjangoReadOnlyMagics)
+
+
+def unload_ipython_extension(ipython: Any) -> None:
+    global ipython_extension_loaded
+
+    ipython_extension_loaded = False

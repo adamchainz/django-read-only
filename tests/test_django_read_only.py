@@ -1,15 +1,19 @@
 from __future__ import annotations
 
 import os
+import re
+import subprocess
+import sys
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
+from pathlib import Path
 from typing import Any, Callable
 from unittest import mock
 
 import pytest
 from django.contrib.sites.models import Site
 from django.db import connection, transaction
-from django.test import TestCase, override_settings
+from django.test import SimpleTestCase, TestCase, override_settings
 
 import django_read_only
 
@@ -153,3 +157,112 @@ class DjangoReadOnlyTests(TestCase):
             result = executor.submit(threadable).result()
 
         assert result == [django_read_only.blocker]
+
+
+REPO_PATH = Path(__file__).resolve().parent.parent
+SETUP_CFG_PATH = str(REPO_PATH / "setup.cfg")
+
+
+class IPythonTests(SimpleTestCase):
+    # Depends on monkeypatching sys.stdin.isatty() in tests/__init__.py
+
+    def run_ipython_shell(
+        self, input_lines: list[str]
+    ) -> subprocess.CompletedProcess[str]:
+        proc = subprocess.run(
+            [sys.executable, "-m", "django", "shell", "-i", "ipython"],
+            input="\n".join(input_lines),
+            capture_output=True,
+            cwd=REPO_PATH,
+            env={
+                "DJANGO_SETTINGS_MODULE": "tests.settings",
+                "DJANGO_READ_ONLY": "1",
+                "COVERAGE_PROCESS_START": SETUP_CFG_PATH,
+            },
+            text=True,
+        )
+        assert proc.returncode == 0
+        return proc
+
+    def test_load_unload(self):
+        proc = self.run_ipython_shell(
+            [
+                r"%load_ext django_read_only",
+                r"%unload_ext django_read_only",
+            ]
+        )
+
+        lines = proc.stdout.splitlines()
+        assert lines[-3:] == [
+            "In [1]: ",
+            "In [2]: ",
+            "In [3]: Do you really want to exit ([y]/n)? ",
+        ]
+        assert proc.stderr == ""
+
+    def test_error_message(self):
+        proc = self.run_ipython_shell(
+            [
+                r"%load_ext django_read_only",
+                "from django.db import connection",
+                "connection.cursor().execute('INSERT INTO DUAL')",
+            ]
+        )
+
+        lines = proc.stdout.splitlines()
+        assert re.sub(r"\x1b.*?m", "", lines[-3]) == (
+            "DjangoReadOnlyError: Write queries are currently disabled. "
+            + "Enable with '%read_only off' or django_read_only.enable_writes()."
+        )
+        assert proc.stderr == ""
+
+    def test_read_only_on(self):
+        proc = self.run_ipython_shell(
+            [
+                r"%load_ext django_read_only",
+                r"%read_only on",
+            ]
+        )
+
+        lines = proc.stdout.splitlines()
+        assert lines[-4:] == [
+            "In [1]: ",
+            "In [2]: Write queries disabled.",
+            "",
+            "In [3]: Do you really want to exit ([y]/n)? ",
+        ]
+        assert proc.stderr == ""
+
+    def test_read_only_off(self):
+        proc = self.run_ipython_shell(
+            [
+                r"%load_ext django_read_only",
+                r"%read_only off",
+            ]
+        )
+
+        lines = proc.stdout.splitlines()
+        assert lines[-4:] == [
+            "In [1]: ",
+            "In [2]: Write queries enabled.",
+            "",
+            "In [3]: Do you really want to exit ([y]/n)? ",
+        ]
+        assert proc.stderr == ""
+
+    def test_read_only_unknown(self):
+        proc = self.run_ipython_shell(
+            [
+                r"%load_ext django_read_only",
+                r"%read_only whatever",
+            ]
+        )
+
+        lines = proc.stdout.splitlines()
+        assert lines[-4:] == [
+            "In [1]: ",
+            "In [2]: Unknown value 'whatever', pass 'on' or 'off'.",
+            "",
+            "In [3]: Do you really want to exit ([y]/n)? ",
+        ]
+        assert proc.stderr == ""
