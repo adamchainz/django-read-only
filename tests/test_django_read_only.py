@@ -7,13 +7,17 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
+from typing import Callable
 from unittest import mock
 
 import pytest
 from django.contrib.sites.models import Site
-from django.db import connection, transaction
-from django.test import SimpleTestCase, TestCase, override_settings
+from django.db import connection
+from django.db import transaction
+from django.test import override_settings
+from django.test import SimpleTestCase
+from django.test import TestCase
 
 import django_read_only
 
