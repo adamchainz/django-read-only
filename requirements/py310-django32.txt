@@ -84,9 +84,9 @@ django==3.2.16 \
     --hash=sha256:18ba8efa36b69cfcd4b670d0fa187c6fe7506596f0ababe580e16909bcdec121 \
     --hash=sha256:3adc285124244724a394fa9b9839cc8cd116faf7d159554c43ecdaa8cdf0b94d
     # via -r requirements.in
-exceptiongroup==1.0.1 \
-    --hash=sha256:4d6c0aa6dd825810941c792f53d7b8d71da26f5e5f84f20f9508e8f2d33b140a \
-    --hash=sha256:73866f7f842ede6cb1daa42c4af078e2035e5f7607f0e2c762cc51bb31bbe7b2
+exceptiongroup==1.0.4 \
+    --hash=sha256:542adf9dea4055530d6e1279602fa5cb11dab2395fa650b8674eaec35fc4a828 \
+    --hash=sha256:bd14967b79cd9bdb54d97323216f8fdf533e278df937aa2a90089e7d6e06e5ec
     # via pytest
 executing==1.2.0 \
     --hash=sha256:0314a69e37426e3608aada02473b4161d4caf5a4b244d1d0c48072b8fee7bacc \
@@ -100,9 +100,9 @@ ipython==8.6.0 \
     --hash=sha256:7c959e3dedbf7ed81f9b9d8833df252c430610e2a4a6464ec13cd20975ce20a5 \
     --hash=sha256:91ef03016bcf72dd17190f863476e7c799c6126ec7e8be97719d1bc9a78a59a4
     # via -r requirements.in
-jedi==0.18.1 \
-    --hash=sha256:637c9635fcf47945ceb91cd7f320234a7be540ded6f3e99a50cb6febdfd1ba8d \
-    --hash=sha256:74137626a64a99c8eb6ae5832d99b3bdd7d29a3850fe2aa80a4126b2a7d949ab
+jedi==0.18.2 \
+    --hash=sha256:203c1fd9d969ab8f2119ec0a3342e0b49910045abe6af0a3ae83a5764d54639e \
+    --hash=sha256:bae794c30d07f6d910d32a7048af09b5a39ed740918da923c6b780790ebac612
     # via ipython
 matplotlib-inline==0.1.6 \
     --hash=sha256:f1f41aab5328aa5aaea9b16d083b128102f8712542f819fe7e6a420ff581b311 \
@@ -128,9 +128,9 @@ pluggy==1.0.0 \
     --hash=sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159 \
     --hash=sha256:74134bbf457f031a36d68416e1509f34bd5ccc019f0bcc952c7b909d06b37bd3
     # via pytest
-prompt-toolkit==3.0.32 \
-    --hash=sha256:24becda58d49ceac4dc26232eb179ef2b21f133fecda7eed6018d341766ed76e \
-    --hash=sha256:e7f2129cba4ff3b3656bbdda0e74ee00d2f874a8bcdb9dd16f5fec7b3e173cae
+prompt-toolkit==3.0.33 \
+    --hash=sha256:535c29c31216c77302877d5120aef6c94ff573748a5b5ca5b1b1f76f5e700c73 \
+    --hash=sha256:ced598b222f6f4029c0800cefaa6a17373fb580cd093223003475ce32805c35b
     # via ipython
 ptyprocess==0.7.0 \
     --hash=sha256:4b41f3967fce3af57cc7e94b888626c18bf37a083e3651ca8feeb66d492fef35 \
@@ -175,9 +175,9 @@ sqlparse==0.4.3 \
     --hash=sha256:0323c0ec29cd52bceabc1b4d9d579e311f3e4961b98d174201d5622a23b85e34 \
     --hash=sha256:69ca804846bb114d2ec380e4360a8a340db83f0ccf3afceeb1404df028f57268
     # via django
-stack-data==0.6.0 \
-    --hash=sha256:8e515439f818efaa251036af72d89e4026e2b03993f3453c000b200fb4f2d6aa \
-    --hash=sha256:b92d206ef355a367d14316b786ab41cb99eb453a21f2cb216a4204625ff7bc07
+stack-data==0.6.1 \
+    --hash=sha256:6c9a10eb5f342415fe085db551d673955611afb821551f554d91772415464315 \
+    --hash=sha256:960cb054d6a1b2fdd9cbd529e365b3c163e8dabf1272e02cfe36b58403cff5c6
     # via ipython
 tomli==2.0.1 \
     --hash=sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc \
