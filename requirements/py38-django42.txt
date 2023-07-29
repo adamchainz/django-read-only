@@ -128,9 +128,9 @@ ipython==8.12.2 \
     --hash=sha256:c7b80eb7f5a855a88efc971fda506ff7a91c280b42cdae26643e0f601ea281ea \
     --hash=sha256:ea8801f15dfe4ffb76dea1b09b847430ffd70d827b41735c64a0638a04103bfc
     # via -r requirements.in
-jedi==0.18.2 \
-    --hash=sha256:203c1fd9d969ab8f2119ec0a3342e0b49910045abe6af0a3ae83a5764d54639e \
-    --hash=sha256:bae794c30d07f6d910d32a7048af09b5a39ed740918da923c6b780790ebac612
+jedi==0.19.0 \
+    --hash=sha256:bcf9894f1753969cbac8022a8c2eaee06bfa3724e4192470aaffe7eb6272b0c4 \
+    --hash=sha256:cb8ce23fbccff0025e9386b5cf85e892f94c9b822378f8da49970471335ac64e
     # via ipython
 matplotlib-inline==0.1.6 \
     --hash=sha256:f1f41aab5328aa5aaea9b16d083b128102f8712542f819fe7e6a420ff581b311 \
