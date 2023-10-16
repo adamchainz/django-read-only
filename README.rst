@@ -20,19 +20,18 @@ django-read-only
 
 Disable Django database writes.
 
+----
+
+**Work smarter and faster** with my book `Boost Your Django DX <https://adamchainz.gumroad.com/l/byddx>`__ which covers django-read-only, IPython, and many other tools.
+
+----
+
 Requirements
 ------------
 
 Python 3.8 to 3.12 supported.
 
 Django 3.2 to 5.0 supported.
-
-----
-
-**Want to work smarter and faster?**
-Check out my book `Boost Your Django DX <https://adamchainz.gumroad.com/l/byddx>`__ which covers django-read-only, IPython, and many other tools.
-
-----
 
 Installation
 ------------
