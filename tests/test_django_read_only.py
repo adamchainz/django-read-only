@@ -164,7 +164,7 @@ class DjangoReadOnlyTests(TestCase):
 
 
 REPO_PATH = Path(__file__).resolve().parent.parent
-SETUP_CFG_PATH = str(REPO_PATH / "setup.cfg")
+PYPROJECT_PATH = str(REPO_PATH / "pyproject.toml")
 
 
 class IPythonTests(SimpleTestCase):
@@ -181,7 +181,7 @@ class IPythonTests(SimpleTestCase):
             env={
                 "DJANGO_SETTINGS_MODULE": "tests.settings",
                 "DJANGO_READ_ONLY": "1",
-                "COVERAGE_PROCESS_START": SETUP_CFG_PATH,
+                "COVERAGE_PROCESS_START": PYPROJECT_PATH,
             },
             text=True,
         )
