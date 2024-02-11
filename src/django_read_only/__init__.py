@@ -115,7 +115,9 @@ def temp_writes() -> Generator[None, None, None]:
 def load_ipython_extension(ipython: Any) -> None:
     global ipython_extension_loaded
 
-    from IPython.core.magic import Magics, line_magic, magics_class
+    from IPython.core.magic import Magics
+    from IPython.core.magic import line_magic
+    from IPython.core.magic import magics_class
 
     ipython_extension_loaded = True
 

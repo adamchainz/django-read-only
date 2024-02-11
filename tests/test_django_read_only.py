@@ -15,9 +15,9 @@ import pytest
 from django.contrib.sites.models import Site
 from django.db import connection
 from django.db import transaction
-from django.test import override_settings
 from django.test import SimpleTestCase
 from django.test import TestCase
+from django.test import override_settings
 
 import django_read_only
 
