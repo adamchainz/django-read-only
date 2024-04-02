@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from contextlib import contextmanager
+from contextvars import ContextVar
 from typing import Any
 from typing import Callable
 from typing import Generator
@@ -13,7 +14,7 @@ from django.db import connections
 from django.db.backends.base.base import BaseDatabaseWrapper
 from django.db.backends.signals import connection_created
 
-read_only = False
+read_only = ContextVar("django_read_only", default=False)
 ipython_extension_loaded = False
 
 
@@ -35,9 +36,9 @@ class DjangoReadOnlyAppConfig(AppConfig):
 def set_read_only() -> None:
     global read_only
     if settings.is_overridden("DJANGO_READ_ONLY"):
-        read_only = settings.DJANGO_READ_ONLY
+        read_only.set(settings.DJANGO_READ_ONLY)
     else:
-        read_only = bool(os.environ.get("DJANGO_READ_ONLY", ""))
+        read_only.set(bool(os.environ.get("DJANGO_READ_ONLY", "")))
 
 
 def reset_read_only(setting: str, **kwargs: object) -> None:
@@ -69,7 +70,7 @@ def blocker(
     many: bool,
     context: dict[str, Any],
 ) -> Any:
-    if read_only and should_block(sql):
+    if read_only.get() and should_block(sql):
         msg = "Write queries are currently disabled. "
         if ipython_extension_loaded:
             msg += "Enable with '%read_only off' or django_read_only.enable_writes()."
@@ -95,12 +96,12 @@ def should_block(sql: str) -> bool:
 
 def enable_writes() -> None:
     global read_only
-    read_only = False
+    read_only.set(False)
 
 
 def disable_writes() -> None:
     global read_only
-    read_only = True
+    read_only.set(True)
 
 
 @contextmanager

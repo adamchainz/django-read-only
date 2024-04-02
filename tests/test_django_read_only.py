@@ -27,7 +27,7 @@ set_env_vars = partial(mock.patch.dict, os.environ)
 class DjangoReadOnlyTests(TestCase):
     def tearDown(self):
         # reset after every test
-        django_read_only.read_only = False
+        django_read_only.read_only.set(False)
         super().tearDown()
 
     def test_set_read_only_default_false(self):
@@ -38,7 +38,7 @@ class DjangoReadOnlyTests(TestCase):
         with set_env_vars(DJANGO_READ_ONLY=""):
             django_read_only.set_read_only()
 
-            assert not django_read_only.read_only
+            assert not django_read_only.read_only.get()
 
     def test_set_read_only_setting_on(self):
         """
@@ -50,7 +50,7 @@ class DjangoReadOnlyTests(TestCase):
         ):
             django_read_only.set_read_only()
 
-            assert django_read_only.read_only
+            assert django_read_only.read_only.get()
 
     def test_set_read_only_env_var_on(self):
         """
@@ -60,7 +60,7 @@ class DjangoReadOnlyTests(TestCase):
         with set_env_vars(DJANGO_READ_ONLY="something"):
             django_read_only.set_read_only()
 
-            assert django_read_only.read_only
+            assert django_read_only.read_only.get()
 
     def test_set_read_only_setting_precedence_to_env_var(self):
         """
@@ -72,7 +72,7 @@ class DjangoReadOnlyTests(TestCase):
         ):
             django_read_only.set_read_only()
 
-            assert not django_read_only.read_only
+            assert not django_read_only.read_only.get()
 
     def test_setting_changed(self):
         """
@@ -80,17 +80,17 @@ class DjangoReadOnlyTests(TestCase):
         appropriately.
         """
         with override_settings(DJANGO_READ_ONLY=False):
-            assert not django_read_only.read_only
+            assert not django_read_only.read_only.get()
 
             with override_settings(DJANGO_READ_ONLY=True):
-                assert django_read_only.read_only
+                assert django_read_only.read_only.get()
 
     def test_setting_changed_different_setting(self):
         """
         Check that if a different setting changes, read_only doesn't change.
         """
         with override_settings(SITE_ID=2):
-            assert not django_read_only.read_only
+            assert not django_read_only.read_only.get()
 
     def test_disable_writes(self):
         django_read_only.disable_writes()
