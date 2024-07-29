@@ -104,7 +104,7 @@ def disable_writes() -> None:
 
 
 @contextmanager
-def temp_writes() -> Generator[None, None, None]:
+def temp_writes() -> Generator[None]:
     enable_writes()
     try:
         yield
