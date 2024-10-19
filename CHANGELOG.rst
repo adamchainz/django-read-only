@@ -2,6 +2,9 @@
 Changelog
 =========
 
+1.17.0 (2024-10-20)
+-------------------
+
 * Add support for inspecting SQL using `psycopg 3’s SQL API <https://www.psycopg.org/psycopg3/docs/api/sql.html>`__.
 
 * Drop Python 3.8 support.
