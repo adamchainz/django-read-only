@@ -45,8 +45,9 @@ class DjangoReadOnlyTests(TestCase):
         Check that if the setting is True, AppConfig.ready() defaults read only
         mode to ON.
         """
-        with set_env_vars(DJANGO_READ_ONLY=""), override_settings(
-            DJANGO_READ_ONLY=True
+        with (
+            set_env_vars(DJANGO_READ_ONLY=""),
+            override_settings(DJANGO_READ_ONLY=True),
         ):
             django_read_only.set_read_only()
 
@@ -67,8 +68,9 @@ class DjangoReadOnlyTests(TestCase):
         Check that if both the setting and environment variable are set,
         the setting takes precendence.
         """
-        with set_env_vars(DJANGO_READ_ONLY="=something"), override_settings(
-            DJANGO_READ_ONLY=False
+        with (
+            set_env_vars(DJANGO_READ_ONLY="=something"),
+            override_settings(DJANGO_READ_ONLY=False),
         ):
             django_read_only.set_read_only()
 
