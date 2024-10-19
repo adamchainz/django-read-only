@@ -90,7 +90,7 @@ def should_block(sql: Any) -> bool:
     if isinstance(sql, str):
         pass
     elif HAVE_PSYCOPG and isinstance(sql, Composable):
-        sql = sql.as_string()
+        sql = sql.as_string(None)
     else:
         return True
     return not sql.lstrip(" \n(").startswith(

@@ -29,9 +29,9 @@ set_env_vars = partial(mock.patch.dict, os.environ)
 
 
 @contextmanager
-def patch_pscyopg_composable_support_onto_cursor():
+def patch_psycopg_composable_support_onto_cursor():
     """
-    Make Django's default CursorWrapper convert pscyopg's Composable objects to
+    Make Django's default CursorWrapper convert psycopg's Composable objects to
     strings, to allow the test suite using SQLite to check the support for
     these objects.
     """
@@ -39,7 +39,7 @@ def patch_pscyopg_composable_support_onto_cursor():
 
     def execute_wrapper(self, sql, *args, **kwargs):
         if isinstance(sql, Composable):
-            sql = sql.as_string()
+            sql = sql.as_string(None)
         return orig_execute(self, sql, *args, **kwargs)
 
     CursorWrapper._execute = execute_wrapper  # type: ignore [attr-defined]
@@ -152,22 +152,22 @@ class DjangoReadOnlyTests(TestCase):
 
         Site.objects.order_by().union(Site.objects.order_by()).count()
 
-    def test_disable_writes_allows_pscyopg_sql_select(self):
+    def test_disable_writes_allows_psycopg_sql_select(self):
         django_read_only.disable_writes()
 
         with (
-            patch_pscyopg_composable_support_onto_cursor(),
+            patch_psycopg_composable_support_onto_cursor(),
             connection.cursor() as cursor,
         ):
             cursor.execute(SQL("SELECT 1"))
             row = cursor.fetchone()
         assert row == (1,)
 
-    def test_disable_writes_disallows_pscyopg_sql_update(self):
+    def test_disable_writes_disallows_psycopg_sql_update(self):
         django_read_only.disable_writes()
 
         with (
-            patch_pscyopg_composable_support_onto_cursor(),
+            patch_psycopg_composable_support_onto_cursor(),
             pytest.raises(django_read_only.DjangoReadOnlyError),
             connection.cursor() as cursor,
         ):
