@@ -5,6 +5,7 @@ import re
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import contextmanager
 from functools import partial
 from pathlib import Path
 from typing import Any
@@ -15,13 +16,38 @@ import pytest
 from django.contrib.sites.models import Site
 from django.db import connection
 from django.db import transaction
+from django.db.backends.utils import CursorWrapper
 from django.test import SimpleTestCase
 from django.test import TestCase
 from django.test import override_settings
+from psycopg.sql import SQL
+from psycopg.sql import Composable
 
 import django_read_only
 
 set_env_vars = partial(mock.patch.dict, os.environ)
+
+
+@contextmanager
+def patch_pscyopg_composable_support_onto_cursor():
+    """
+    Make Django's default CursorWrapper convert pscyopg's Composable objects to
+    strings, to allow the test suite using SQLite to check the support for
+    these objects.
+    """
+    orig_execute = CursorWrapper._execute  # type: ignore [attr-defined]
+
+    def execute_wrapper(self, sql, *args, **kwargs):
+        if isinstance(sql, Composable):
+            sql = sql.as_string()
+        return orig_execute(self, sql, *args, **kwargs)
+
+    CursorWrapper._execute = execute_wrapper  # type: ignore [attr-defined]
+
+    try:
+        yield
+    finally:
+        CursorWrapper._execute = orig_execute  # type: ignore [attr-defined]
 
 
 class DjangoReadOnlyTests(TestCase):
@@ -110,17 +136,51 @@ class DjangoReadOnlyTests(TestCase):
 
         with connection.cursor() as cursor:
             cursor.execute(" SELECT 1")
+            row = cursor.fetchone()
+        assert row == (1,)
 
     def test_disable_writes_allows_newline_prefix(self):
         django_read_only.disable_writes()
 
         with connection.cursor() as cursor:
             cursor.execute("\nSELECT 1")
+            row = cursor.fetchone()
+        assert row == (1,)
 
     def test_disable_writes_allows_union(self):
         django_read_only.disable_writes()
 
         Site.objects.order_by().union(Site.objects.order_by()).count()
+
+    def test_disable_writes_allows_pscyopg_sql_select(self):
+        django_read_only.disable_writes()
+
+        with (
+            patch_pscyopg_composable_support_onto_cursor(),
+            connection.cursor() as cursor,
+        ):
+            cursor.execute(SQL("SELECT 1"))
+            row = cursor.fetchone()
+        assert row == (1,)
+
+    def test_disable_writes_disallows_pscyopg_sql_update(self):
+        django_read_only.disable_writes()
+
+        with (
+            patch_pscyopg_composable_support_onto_cursor(),
+            pytest.raises(django_read_only.DjangoReadOnlyError),
+            connection.cursor() as cursor,
+        ):
+            cursor.execute(SQL("UPDATE something"))
+
+    def test_disable_writes_disallows_unsupport_types(self):
+        django_read_only.disable_writes()
+
+        with (
+            pytest.raises(django_read_only.DjangoReadOnlyError),
+            connection.cursor() as cursor,
+        ):
+            cursor.execute(123)  # type: ignore [arg-type]
 
     def test_disable_writes_allows_atomics_around_reads(self):
         django_read_only.disable_writes()
@@ -145,7 +205,7 @@ class DjangoReadOnlyTests(TestCase):
     def test_alongside_other_instrumentation(self):
         def noop(
             execute: Callable[[str, str, bool, dict[str, Any]], Any],
-            sql: str,
+            sql: Any,
             params: str,
             many: bool,
             context: dict[str, Any],

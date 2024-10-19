@@ -2,6 +2,8 @@
 Changelog
 =========
 
+* Add support for inspecting SQL using `psycopg 3’s SQL API <https://www.psycopg.org/psycopg3/docs/api/sql.html>`__.
+
 * Drop Python 3.8 support.
 
 * Support Python 3.13.

@@ -13,6 +13,13 @@ from django.db import connections
 from django.db.backends.base.base import BaseDatabaseWrapper
 from django.db.backends.signals import connection_created
 
+try:
+    from psycopg.sql import Composable
+
+    HAVE_PSYCOPG = True
+except ImportError:
+    HAVE_PSYCOPG = False
+
 read_only = False
 ipython_extension_loaded = False
 
@@ -64,7 +71,7 @@ class DjangoReadOnlyError(Exception):
 
 def blocker(
     execute: Callable[[str, str, bool, dict[str, Any]], Any],
-    sql: str,
+    sql: Any,
     params: str,
     many: bool,
     context: dict[str, Any],
@@ -79,7 +86,13 @@ def blocker(
     return execute(sql, params, many, context)
 
 
-def should_block(sql: str) -> bool:
+def should_block(sql: Any) -> bool:
+    if isinstance(sql, str):
+        pass
+    elif HAVE_PSYCOPG and isinstance(sql, Composable):
+        sql = sql.as_string()
+    else:
+        return True
     return not sql.lstrip(" \n(").startswith(
         (
             "EXPLAIN ",
