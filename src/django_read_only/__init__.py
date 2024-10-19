@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import os
+from collections.abc import Generator
 from contextlib import contextmanager
 from typing import Any
 from typing import Callable
-from typing import Generator
 
 from django.apps import AppConfig
 from django.conf import settings
