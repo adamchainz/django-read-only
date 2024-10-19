@@ -37,7 +37,7 @@ def patch_psycopg_composable_support_onto_cursor():
     """
     orig_execute = CursorWrapper._execute  # type: ignore [attr-defined]
 
-    def execute_wrapper(self, sql, *args, **kwargs):
+    def execute_wrapper(self, sql, *args, **kwargs):  # pragma: no cover
         if isinstance(sql, Composable):
             sql = sql.as_string(None)
         return orig_execute(self, sql, *args, **kwargs)

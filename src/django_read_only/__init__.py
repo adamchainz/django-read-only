@@ -17,7 +17,7 @@ try:
     from psycopg.sql import Composable
 
     HAVE_PSYCOPG = True
-except ImportError:
+except ImportError:  # pragma: no cover
     HAVE_PSYCOPG = False
 
 read_only = False
