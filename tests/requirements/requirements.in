@@ -1,7 +1,0 @@
-coverage[toml]
-django
-ipython
-psycopg[binary]
-pytest
-pytest-django
-pytest-randomly
