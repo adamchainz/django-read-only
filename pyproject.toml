@@ -44,7 +44,6 @@ urls = { Changelog = "https://github.com/adamchainz/django-read-only/blob/main/C
 [dependency-groups]
 test = [
   "coverage[toml]",
-  "django",
   "ipython",
   "psycopg[binary]",
   "pytest",
