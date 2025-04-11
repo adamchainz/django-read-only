@@ -48,7 +48,6 @@ def set_read_only() -> None:
 
 
 def reset_read_only(setting: str, **kwargs: object) -> None:
-    global read_only
     if setting == "DJANGO_READ_ONLY":
         set_read_only()
 
