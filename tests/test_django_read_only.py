@@ -92,7 +92,7 @@ class DjangoReadOnlyTests(TestCase):
     def test_set_read_only_setting_precedence_to_env_var(self):
         """
         Check that if both the setting and environment variable are set,
-        the setting takes precendence.
+        the setting takes precedence.
         """
         with (
             set_env_vars(DJANGO_READ_ONLY="=something"),
@@ -173,7 +173,7 @@ class DjangoReadOnlyTests(TestCase):
         ):
             cursor.execute(SQL("UPDATE something"))
 
-    def test_disable_writes_disallows_unsupport_types(self):
+    def test_disable_writes_disallows_unsupported_types(self):
         django_read_only.disable_writes()
 
         with (
