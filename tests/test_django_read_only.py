@@ -8,20 +8,15 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from functools import partial
 from pathlib import Path
-from typing import Any
-from typing import Callable
+from typing import Any, Callable
 from unittest import mock
 
 import pytest
 from django.contrib.sites.models import Site
-from django.db import connection
-from django.db import transaction
+from django.db import connection, transaction
 from django.db.backends.utils import CursorWrapper
-from django.test import SimpleTestCase
-from django.test import TestCase
-from django.test import override_settings
-from psycopg.sql import SQL
-from psycopg.sql import Composable
+from django.test import SimpleTestCase, TestCase, override_settings
+from psycopg.sql import SQL, Composable
 
 import django_read_only
 
@@ -213,9 +208,8 @@ class DjangoReadOnlyTests(TestCase):
             return execute(sql, params, many, context)
 
         def threadable() -> list[Any]:
-            with connection.execute_wrapper(noop):
-                with connection.cursor() as cursor:
-                    cursor.execute("SELECT 1234")
+            with connection.execute_wrapper(noop), connection.cursor() as cursor:
+                cursor.execute("SELECT 1234")
 
             return connection.execute_wrappers
 

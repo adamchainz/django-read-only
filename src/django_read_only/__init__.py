@@ -3,8 +3,7 @@ from __future__ import annotations
 import os
 from collections.abc import Generator
 from contextlib import contextmanager
-from typing import Any
-from typing import Callable
+from typing import Any, Callable
 
 from django.apps import AppConfig
 from django.conf import settings
@@ -127,9 +126,7 @@ def temp_writes() -> Generator[None]:
 def load_ipython_extension(ipython: Any) -> None:
     global ipython_extension_loaded
 
-    from IPython.core.magic import Magics
-    from IPython.core.magic import line_magic
-    from IPython.core.magic import magics_class
+    from IPython.core.magic import Magics, line_magic, magics_class
 
     ipython_extension_loaded = True
 
