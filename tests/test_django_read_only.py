@@ -4,7 +4,6 @@ import os
 import re
 import subprocess
 import sys
-from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from functools import partial
 from pathlib import Path
@@ -198,6 +197,10 @@ class DjangoReadOnlyTests(TestCase):
             Site.objects.create(domain="example.co", name="Example co")
 
     def test_alongside_other_instrumentation(self):
+        connection.close()
+
+        assert connection.execute_wrappers == [django_read_only.blocker]
+
         def noop(
             execute: Callable[[str, str, bool, dict[str, Any]], Any],
             sql: Any,
@@ -207,16 +210,11 @@ class DjangoReadOnlyTests(TestCase):
         ) -> Any:
             return execute(sql, params, many, context)
 
-        def threadable() -> list[Any]:
-            with connection.execute_wrapper(noop), connection.cursor() as cursor:
-                cursor.execute("SELECT 1234")
+        with connection.execute_wrapper(noop), connection.cursor() as cursor:
+            assert connection.execute_wrappers == [django_read_only.blocker, noop]
+            cursor.execute("SELECT 1234")
 
-            return connection.execute_wrappers
-
-        with ThreadPoolExecutor(max_workers=1) as executor:
-            result = executor.submit(threadable).result()
-
-        assert result == [django_read_only.blocker]
+        assert connection.execute_wrappers == [django_read_only.blocker]
 
 
 REPO_PATH = Path(__file__).resolve().parent.parent
