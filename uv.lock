@@ -227,7 +227,7 @@ wheels = [
 
 [[package]]
 name = "django-read-only"
-version = "1.19.0"
+version = "1.20.0"
 source = { editable = "." }
 dependencies = [
     { name = "django", version = "4.2.23", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10' or extra == 'group-16-django-read-only-django42' or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django51') or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django51' and extra == 'group-16-django-read-only-django52')" },
