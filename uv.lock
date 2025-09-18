@@ -159,10 +159,10 @@ name = "django"
 version = "4.2.23"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
-    "python_full_version < '3.10'",
     "python_full_version >= '3.12'",
     "python_full_version == '3.11.*'",
     "python_full_version == '3.10.*'",
+    "python_full_version < '3.10'",
 ]
 dependencies = [
     { name = "asgiref", marker = "python_full_version < '3.10' or extra == 'group-16-django-read-only-django42' or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django51') or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django51' and extra == 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django51' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
@@ -217,9 +217,9 @@ name = "django"
 version = "5.2.5"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
+    "python_full_version >= '3.12'",
     "python_full_version == '3.11.*'",
     "python_full_version == '3.10.*'",
-    "python_full_version >= '3.12'",
 ]
 dependencies = [
     { name = "asgiref", marker = "(python_full_version >= '3.10' and python_full_version < '3.12' and extra != 'group-16-django-read-only-django42' and extra != 'group-16-django-read-only-django50' and extra != 'group-16-django-read-only-django51') or (python_full_version >= '3.12' and extra == 'group-16-django-read-only-django52') or (python_full_version < '3.10' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django42' and extra == 'group-16-django-read-only-django50') or (extra == 'group-16-django-read-only-django42' and extra == 'group-16-django-read-only-django51') or (extra == 'group-16-django-read-only-django42' and extra == 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django42' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django51') or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django51' and extra == 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django51' and extra == 'group-16-django-read-only-django60')" },
@@ -250,7 +250,7 @@ wheels = [
 
 [[package]]
 name = "django-read-only"
-version = "1.20.0"
+version = "1.21.0"
 source = { editable = "." }
 dependencies = [
     { name = "django", version = "4.2.23", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10' or extra == 'group-16-django-read-only-django42' or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django51') or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django50' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django51' and extra == 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django51' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
