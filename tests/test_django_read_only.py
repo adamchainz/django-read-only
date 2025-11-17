@@ -4,10 +4,11 @@ import os
 import re
 import subprocess
 import sys
+from collections.abc import Callable
 from contextlib import contextmanager
 from functools import partial
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 from unittest import mock
 
 import pytest
