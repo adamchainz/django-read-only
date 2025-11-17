@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import os
-from collections.abc import Generator
+from collections.abc import Callable, Generator
 from contextlib import contextmanager
-from typing import Any, Callable
+from typing import Any
 
 from django.apps import AppConfig
 from django.conf import settings
