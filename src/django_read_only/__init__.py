@@ -132,7 +132,7 @@ def load_ipython_extension(ipython: Any) -> None:
 
     @magics_class
     class DjangoReadOnlyMagics(Magics):  # type: ignore [misc]
-        @line_magic  # type: ignore [misc]
+        @line_magic  # type: ignore[untyped-decorator]
         def read_only(self, line: str) -> None:
             if line == "on":
                 disable_writes()
