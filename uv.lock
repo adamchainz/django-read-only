@@ -2,18 +2,22 @@ version = 1
 revision = 3
 requires-python = ">=3.10"
 resolution-markers = [
-    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60'",
-    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60'",
-    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60'",
-    "python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
-    "python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
-    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
-    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
-    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
+    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61'",
+    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61'",
+    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61'",
+    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
 ]
 conflicts = [[
     { package = "django-read-only", group = "django52" },
     { package = "django-read-only", group = "django60" },
+    { package = "django-read-only", group = "django61" },
 ]]
 
 [[package]]
@@ -21,7 +25,7 @@ name = "asgiref"
 version = "3.11.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/63/40/f03da1264ae8f7cfdbf9146542e5e7e8100a4c66ab48e791df9a03d3f6c0/asgiref-3.11.1.tar.gz", hash = "sha256:5f184dc43b7e763efe848065441eac62229c9f7b0475f41f80e207a114eda4ce", size = 38550, upload-time = "2026-02-03T13:30:14.33Z" }
 wheels = [
@@ -161,7 +165,7 @@ wheels = [
 
 [package.optional-dependencies]
 toml = [
-    { name = "tomli", marker = "python_full_version <= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "tomli", marker = "python_full_version <= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 
 [[package]]
@@ -178,17 +182,19 @@ name = "django"
 version = "5.2.14"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
-    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60'",
-    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60'",
-    "python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
-    "python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
-    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
-    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
+    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61'",
+    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61'",
+    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version < '3.11' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
 ]
 dependencies = [
-    { name = "asgiref", marker = "python_full_version < '3.12' or extra == 'group-16-django-read-only-django52'" },
-    { name = "sqlparse", marker = "python_full_version < '3.12' or extra == 'group-16-django-read-only-django52'" },
-    { name = "tzdata", marker = "(python_full_version < '3.12' and sys_platform == 'win32') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django52') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "asgiref", marker = "python_full_version < '3.12' or extra == 'group-16-django-read-only-django52' or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "sqlparse", marker = "python_full_version < '3.12' or extra == 'group-16-django-read-only-django52' or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "tzdata", marker = "(python_full_version < '3.12' and sys_platform == 'win32') or (python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django52') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/65/95/95f7faa0950867afaa0bef2460c6263afd6a2c78cc9434046ed28160b015/django-5.2.14.tar.gz", hash = "sha256:58a63ba841662e5c686b57ba1fec52ddd68c0b93bd96ac3029d55728f00bf8a2", size = 10895118, upload-time = "2026-05-05T13:57:31.104Z" }
 wheels = [
@@ -203,9 +209,9 @@ resolution-markers = [
     "python_full_version >= '3.12'",
 ]
 dependencies = [
-    { name = "asgiref", marker = "(python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "sqlparse", marker = "(python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "tzdata", marker = "(python_full_version >= '3.12' and sys_platform == 'win32' and extra != 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "asgiref", marker = "(python_full_version >= '3.12' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61')" },
+    { name = "sqlparse", marker = "(python_full_version >= '3.12' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61')" },
+    { name = "tzdata", marker = "(python_full_version >= '3.12' and sys_platform == 'win32' and extra == 'group-16-django-read-only-django60') or (python_full_version < '3.12' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/5e/f1/bf85f0d29ef76abf901f193fe8fef4769d3da7794197832bc30151c071d8/django-6.0.5.tar.gz", hash = "sha256:bc6d6872e98a2864c836e42edd644b362db311147dd5aa8d5b82ba7a032f5269", size = 10924131, upload-time = "2026-05-05T13:54:39.329Z" }
 wheels = [
@@ -213,12 +219,30 @@ wheels = [
 ]
 
 [[package]]
+name = "django"
+version = "6.1a1"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.12'",
+]
+dependencies = [
+    { name = "asgiref", marker = "(python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "sqlparse", marker = "(python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "tzdata", marker = "(python_full_version >= '3.12' and sys_platform == 'win32' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/9c/fc/bbccfafecb518bc6e3dd5da753570f55c8e59dd8cb4b8b428db64d91b867/django-6.1a1.tar.gz", hash = "sha256:abd3a1ec92cf4817654fd83ab708932b5d2d12a0cec993ea169320682c193ad0", size = 11172061, upload-time = "2026-05-20T19:40:50.995Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/37/db/7d4ad06746747ceee4807dc9db16085e1424d7bd9cc8bf7dedf9bba16a93/django-6.1a1-py3-none-any.whl", hash = "sha256:fc617100cc0db25e8e93cb2ed7be65684787a46cbce26ecf87d217e1c5ae4b98", size = 8393399, upload-time = "2026-05-20T19:40:43.638Z" },
+]
+
+[[package]]
 name = "django-read-only"
 version = "1.21.0"
 source = { editable = "." }
 dependencies = [
-    { name = "django", version = "5.2.14", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or extra == 'group-16-django-read-only-django52'" },
-    { name = "django", version = "6.0.5", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "django", version = "5.2.14", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or extra == 'group-16-django-read-only-django52' or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "django", version = "6.0.5", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.12' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61')" },
+    { name = "django", version = "6.1a1", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 
 [package.dev-dependencies]
@@ -228,10 +252,13 @@ django52 = [
 django60 = [
     { name = "django", version = "6.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
+django61 = [
+    { name = "django", version = "6.1a1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
 test = [
     { name = "coverage", extra = ["toml"] },
-    { name = "ipython", version = "8.39.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "ipython", version = "9.13.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "ipython", version = "8.39.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "ipython", version = "9.13.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
     { name = "psycopg", extra = ["binary"] },
     { name = "pytest" },
     { name = "pytest-django" },
@@ -244,6 +271,7 @@ requires-dist = [{ name = "django", specifier = ">=5.2" }]
 [package.metadata.requires-dev]
 django52 = [{ name = "django", marker = "python_full_version >= '3.10'", specifier = ">=5.2a1,<6" }]
 django60 = [{ name = "django", marker = "python_full_version >= '3.12'", specifier = ">=6a1,<6.1" }]
+django61 = [{ name = "django", marker = "python_full_version >= '3.12'", specifier = ">=6.1a1,<6.2" }]
 test = [
     { name = "coverage", extras = ["toml"] },
     { name = "ipython" },
@@ -258,7 +286,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -291,17 +319,17 @@ resolution-markers = [
     "python_full_version < '3.11'",
 ]
 dependencies = [
-    { name = "colorama", marker = "(python_full_version < '3.11' and sys_platform == 'win32') or (python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "decorator", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "exceptiongroup", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "jedi", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "matplotlib-inline", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "pexpect", marker = "(python_full_version < '3.11' and sys_platform != 'emscripten' and sys_platform != 'win32') or (python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform == 'emscripten' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "prompt-toolkit", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "pygments", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "stack-data", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "traitlets", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "typing-extensions", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "colorama", marker = "(python_full_version < '3.11' and sys_platform == 'win32') or (python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (python_full_version >= '3.11' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "decorator", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "exceptiongroup", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "jedi", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "matplotlib-inline", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "pexpect", marker = "(python_full_version < '3.11' and sys_platform != 'emscripten' and sys_platform != 'win32') or (python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (python_full_version >= '3.11' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (sys_platform == 'emscripten' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform == 'emscripten' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (sys_platform == 'emscripten' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "prompt-toolkit", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "pygments", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "stack-data", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "traitlets", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/40/18/f8598d287006885e7136451fdea0755af4ebcbfe342836f24deefaed1164/ipython-8.39.0.tar.gz", hash = "sha256:4110ae96012c379b8b6db898a07e186c40a2a1ef5d57a7fa83166047d9da7624", size = 5513971, upload-time = "2026-03-27T10:02:13.94Z" }
 wheels = [
@@ -313,25 +341,27 @@ name = "ipython"
 version = "9.13.0"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
-    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60'",
-    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60'",
-    "python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
-    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
-    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60'",
+    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61'",
+    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61'",
+    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version >= '3.11' and extra == 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version >= '3.12' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
+    "python_full_version == '3.11.*' and extra != 'group-16-django-read-only-django52' and extra != 'group-16-django-read-only-django60' and extra != 'group-16-django-read-only-django61'",
 ]
 dependencies = [
-    { name = "colorama", marker = "(python_full_version >= '3.11' and sys_platform == 'win32') or (python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "decorator", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "ipython-pygments-lexers", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "jedi", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "matplotlib-inline", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "pexpect", marker = "(python_full_version >= '3.11' and sys_platform != 'emscripten' and sys_platform != 'win32') or (python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform == 'emscripten' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "prompt-toolkit", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "psutil", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "pygments", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "stack-data", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "traitlets", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "typing-extensions", marker = "python_full_version == '3.11.*' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "colorama", marker = "(python_full_version >= '3.11' and sys_platform == 'win32') or (python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (python_full_version < '3.11' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (sys_platform != 'win32' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "decorator", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "ipython-pygments-lexers", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "jedi", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "matplotlib-inline", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "pexpect", marker = "(python_full_version >= '3.11' and sys_platform != 'emscripten' and sys_platform != 'win32') or (python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (python_full_version < '3.11' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (python_full_version < '3.11' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (sys_platform == 'emscripten' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform == 'emscripten' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (sys_platform == 'emscripten' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (sys_platform == 'win32' and extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "prompt-toolkit", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "psutil", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "pygments", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "stack-data", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "traitlets", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "typing-extensions", marker = "python_full_version == '3.11.*' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/cd/c4/87cda5842cf5c31837c06ddb588e11c3c35d8ece89b7a0108c06b8c9b00a/ipython-9.13.0.tar.gz", hash = "sha256:7e834b6afc99f020e3f05966ced34792f40267d64cb1ea9043886dab0dde5967", size = 4430549, upload-time = "2026-04-24T12:24:55.221Z" }
 wheels = [
@@ -343,7 +373,7 @@ name = "ipython-pygments-lexers"
 version = "1.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pygments", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "pygments", marker = "python_full_version >= '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ef/4c/5dd1d8af08107f88c7f741ead7a40854b8ac24ddf9ae850afbcf698aa552/ipython_pygments_lexers-1.1.1.tar.gz", hash = "sha256:09c0138009e56b6854f9535736f4171d855c8c08a563a0dcd8022f78355c7e81", size = 8393, upload-time = "2025-01-17T11:24:34.505Z" }
 wheels = [
@@ -458,8 +488,8 @@ name = "psycopg"
 version = "3.3.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.13' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "tzdata", marker = "sys_platform == 'win32' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "tzdata", marker = "sys_platform == 'win32' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/db/2f/cb91e5502ec9de1de6f1b76cfbf69531932725361168bb06963620c77e2e/psycopg-3.3.4.tar.gz", hash = "sha256:e21207764952cff81b6b8bdacad9a3939f2793367fdac2987b3aac36a651b5bc", size = 165799, upload-time = "2026-05-01T23:31:55.179Z" }
 wheels = [
@@ -468,7 +498,7 @@ wheels = [
 
 [package.optional-dependencies]
 binary = [
-    { name = "psycopg-binary", marker = "implementation_name != 'pypy' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "psycopg-binary", marker = "implementation_name != 'pypy' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 
 [[package]]
@@ -565,13 +595,13 @@ name = "pytest"
 version = "9.0.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
-    { name = "exceptiongroup", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
+    { name = "exceptiongroup", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
     { name = "iniconfig" },
     { name = "packaging" },
     { name = "pluggy" },
     { name = "pygments" },
-    { name = "tomli", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60')" },
+    { name = "tomli", marker = "python_full_version < '3.11' or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django60') or (extra == 'group-16-django-read-only-django52' and extra == 'group-16-django-read-only-django61') or (extra == 'group-16-django-read-only-django60' and extra == 'group-16-django-read-only-django61')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7d/0d/549bd94f1a0a402dc8cf64563a117c0f3765662e2e668477624baeec44d5/pytest-9.0.3.tar.gz", hash = "sha256:b86ada508af81d19edeb213c681b1d48246c1a91d304c6c81a427674c17eb91c", size = 1572165, upload-time = "2026-04-07T17:16:18.027Z" }
 wheels = [
